@@ -5,6 +5,7 @@
   </Configurations>
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
+    <File Path="readme.md" />
   </Folder>
   <Project Path="Calculator/Calculator.vcxproj" />
 </Solution>
