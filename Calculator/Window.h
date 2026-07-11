@@ -23,6 +23,7 @@ private:
 	wxButton* buttonSubtract = nullptr;
 	wxButton* buttonMultiply = nullptr;
 	wxButton* buttonDivide = nullptr;
+	wxButton* buttonModulo = nullptr;
 
 	// Other Buttons:
 	wxButton* buttonClear = nullptr;
@@ -30,6 +31,10 @@ private:
 	wxButton* buttonBackspace = nullptr;
 	wxButton* buttonEquals = nullptr;
 	wxButton* buttonPlusMinus = nullptr;
+	wxButton* buttonSquareRoot = nullptr;
+	wxButton* buttonSin = nullptr;
+	wxButton* buttonCos = nullptr;
+	wxButton* buttonTan = nullptr;
 
 	// Output Box:
 	wxTextCtrl* textBox = nullptr;

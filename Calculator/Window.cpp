@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), wxSize(308, 311)) {
+Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), wxSize(320, 375)) {
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
 	wxBoxSizer* topLevelSizer = new wxBoxSizer(wxVERTICAL);
@@ -19,9 +19,22 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	topLevelSizer->Add(textCtrlSizer, 1, wxEXPAND, 5);
 
-	wxGridSizer* GridButtonSizer = new wxGridSizer(5, 4, 5, 5);
+	wxGridSizer* GridButtonSizer = new wxGridSizer(6, 4, 6, 6);
 
-	// Number Buttons:
+	// Buttons:
+
+	buttonSin = new wxButton(this, wxID_ANY, _("Sin"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonSin, 0, wxALL, 5);
+
+	buttonCos = new wxButton(this, wxID_ANY, _("Cos"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonCos, 0, wxALL, 5);
+
+	buttonTan = new wxButton(this, wxID_ANY, _("Tan"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonTan, 0, wxALL, 5);
+
+	buttonSquareRoot = new wxButton(this, wxID_ANY, _("SQRT"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonSquareRoot, 0, wxALL, 5);
+
 	button7 = new wxButton(this, wxID_ANY, _("7"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(button7, 0, wxALL, 5);
 
@@ -75,6 +88,9 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	buttonPlusMinus = new wxButton(this, wxID_ANY, _("+/-"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(buttonPlusMinus, 0, wxALL, 5);
+
+	buttonModulo = new wxButton(this, wxID_ANY, _("%"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonModulo, 0, wxALL, 5);
 
 	topLevelSizer->Add(GridButtonSizer, 1, wxEXPAND, 5);
 
