@@ -1,6 +1,7 @@
 #pragma once
 #include "wx/wx.h"
 
+
 class Window : public wxFrame
 {
 private:
@@ -22,6 +23,7 @@ private:
 	wxButton* buttonSubtract = nullptr;
 	wxButton* buttonMultiply = nullptr;
 	wxButton* buttonDivide = nullptr;
+	wxButton* buttonModulo = nullptr;
 
 	// Other Buttons:
 	wxButton* buttonClear = nullptr;
@@ -29,6 +31,11 @@ private:
 	wxButton* buttonBackspace = nullptr;
 	wxButton* buttonEquals = nullptr;
 	wxButton* buttonPlusMinus = nullptr;
+	wxButton* buttonLeftParen = nullptr;
+	wxButton* buttonRightParen = nullptr;
+	wxButton* buttonSin = nullptr;
+	wxButton* buttonCos = nullptr;
+	wxButton* buttonTan = nullptr;
 
 	// Output Box:
 	wxTextCtrl* textBox = nullptr;
@@ -37,5 +44,45 @@ public:
 
 	// Default constructor:
 	Window();
+
+	void OnButtonClicked(wxCommandEvent& event);
+
+	// Event handler for button clicks:
+	wxCommandEvent event;
+
+	// Result of the calculation:
+	double result = 0;
+	std::string leftOperand = "", rightOperand = "";
+
+	void OnAdd(wxCommandEvent& event);
+	void OnSubtract(wxCommandEvent& event);
+	void OnDivide(wxCommandEvent& event);
+	void OnMultiply(wxCommandEvent& event);
+	void OnClear(wxCommandEvent& event);
+	void OnDecimal(wxCommandEvent& event);
+	void OnButton1(wxCommandEvent& event);
+	void OnButton2(wxCommandEvent& event);
+	void OnButton3(wxCommandEvent& event);
+	void OnButton4(wxCommandEvent& event);
+	void OnButton5(wxCommandEvent& event);
+	void OnButton6(wxCommandEvent& event);
+	void OnButton7(wxCommandEvent& event);
+	void OnButton8(wxCommandEvent& event);
+	void OnButton9(wxCommandEvent& event);
+	void OnButton0(wxCommandEvent& event);
+	void onButtonBackspace(wxCommandEvent& event);
+	void onButtonPlusMinus(wxCommandEvent& event);
+	void onButtonLeftParen(wxCommandEvent& event);
+	void onButtonRightParen(wxCommandEvent& event);
+	void onButtonSin(wxCommandEvent& event);
+	void onButtonCos(wxCommandEvent& event);
+	void onButtonTan(wxCommandEvent& event);
+	void onButtonModulo(wxCommandEvent& event);
+	void onButtonEquals(wxCommandEvent& event);
+	void UpdateResultDisplay();
+	void onKeypadInput(wxKeyEvent& event);
+
+
+
 
 };
