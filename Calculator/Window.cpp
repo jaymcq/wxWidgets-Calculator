@@ -163,6 +163,199 @@ void Window::OnButtonClicked(wxCommandEvent& event)
 	}
 }
 
+void Window::OnAdd(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Add;
+	textBox->SetFocus();
+}
 
-	
+void Window::OnSubtract(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Subtract;
+	textBox->SetFocus();
+}
 
+void Window::OnDivide(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Divide;
+	textBox->SetFocus();
+}
+
+void Window::OnMultiply(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Multiply;
+	textBox->SetFocus();
+}
+
+void Window::OnClear(wxCommandEvent& event)
+{
+	leftOperand.clear();
+	rightOperand.clear();
+	result = 0;
+	textBox->Clear();
+	textBox->SetFocus();
+}
+
+void Window::OnDecimal(wxCommandEvent& event)
+{
+	if(activeOperand == Left_Operand)
+		leftOperand += ".";
+	else
+		rightOperand += ".";
+	UpdateResult();
+}
+
+void Window::OnButton1(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "1";
+	else
+		rightOperand += "1";
+	UpdateResult();
+}
+
+void Window::OnButton2(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "2";
+	else
+		rightOperand += "2";
+	UpdateResult();
+}
+
+void Window::OnButton3(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "3";
+	else
+		rightOperand += "3";
+	UpdateResult();
+}
+
+void Window::OnButton4(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "4";
+	else
+		rightOperand += "4";
+	UpdateResult();
+}
+
+void Window::OnButton5(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "5";
+	else
+		rightOperand += "5";
+	UpdateResult();
+}
+
+void Window::OnButton6(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "6";
+	else
+		rightOperand += "6";
+	UpdateResult();
+}
+
+void Window::OnButton7(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "7";
+	else
+		rightOperand += "7";
+	UpdateResult();
+}
+
+void Window::OnButton8(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "8";
+	else
+		rightOperand += "8";
+	UpdateResult();
+}
+
+void Window::OnButton9(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "9";
+	else
+		rightOperand += "9";
+	UpdateResult();
+}
+
+void Window::OnButton0(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "0";
+	else
+		rightOperand += "0";
+	UpdateResult();
+}
+
+void Window::onButtonBackspace(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand.pop_back();
+	else
+		rightOperand.pop_back();
+	UpdateResult();
+}
+
+void Window::onButtonPlusMinus(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonLeftParen(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonRightParen(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonSin(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonCos(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonTan(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonModulo(wxCommandEvent& event)
+{
+}
+
+void Window::onButtonEquals(wxCommandEvent& event)
+{
+}
+
+void Window::UpdateResultDisplay()
+{
+}
+
+void Window::onKeypadInput(wxKeyEvent& event)
+{
+}
+
+void Window::UpdateResult(){
+	if (activeOperand == Left_Operand)
+	{
+		result = std::stod(leftOperand);
+	}
+	else if (activeOperand == Right_Operand)
+	{
+		result = std::stod(rightOperand);
+	}
+	UpdateResultDisplay();
+}

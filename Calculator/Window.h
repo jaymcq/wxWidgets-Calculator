@@ -48,11 +48,21 @@ public:
 	void OnButtonClicked(wxCommandEvent& event);
 
 	// Event handler for button clicks:
-	wxCommandEvent event;
+	wxCommandEvent event; 
 
 	// Result of the calculation:
 	double result = 0;
 	std::string leftOperand = "", rightOperand = "";
+
+	// Active Operand:
+	enum Operand { Left_Operand, Right_Operand };
+
+	// Operation:
+	enum Operation { Add, Subtract, Multiply, Divide, Modulo, Sin, Cos, Tan };
+	
+	Operand activeOperand = Left_Operand;
+	Operation currentOperation;
+
 
 	void OnAdd(wxCommandEvent& event);
 	void OnSubtract(wxCommandEvent& event);
@@ -82,7 +92,6 @@ public:
 	void UpdateResultDisplay();
 	void onKeypadInput(wxKeyEvent& event);
 
-
-
+	void UpdateResult();
 
 };
