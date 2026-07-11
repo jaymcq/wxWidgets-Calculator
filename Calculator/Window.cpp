@@ -1,5 +1,32 @@
 #include "Window.h"
 
+enum {
+	BUTTON_0 = 1000,
+	BUTTON_1 = 1001,
+	BUTTON_2 = 1002,
+	BUTTON_3 = 1003,
+	BUTTON_4 = 1004,
+	BUTTON_5 = 1005,
+	BUTTON_6 = 1006,
+	BUTTON_7 = 1007,
+	BUTTON_8 = 1008,
+	BUTTON_9 = 1009,
+	BUTTON_ADD = 1010,
+	BUTTON_SUBTRACT = 1011,
+	BUTTON_MULTIPLY = 1012,
+	BUTTON_DIVIDE = 1013,
+	BUTTON_MODULO = 1014,
+	BUTTON_CLEAR = 1015,
+	BUTTON_DECIMAL = 1016,
+	BUTTON_BACKSPACE = 1017,
+	BUTTON_PLUS_MINUS = 1018,
+	BUTTON_LEFT_PAREN = 1019,
+	BUTTON_RIGHT_PAREN = 1020,
+	BUTTON_SIN = 1021,
+	BUTTON_COS = 1022,
+	BUTTON_TAN = 1023,
+	BUTTON_EQUALS = 1024
+};
 
 
 
@@ -24,79 +51,96 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	wxGridSizer* GridButtonSizer = new wxGridSizer(6, 4, 6, 6);
 
-	// Buttons:
+	// Button Size:
+	wxSize buttonSize(65, 35);
 
-	buttonSin = new wxButton(this, wxID_ANY, _("Sin"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonSin, 0, wxALL, 5);
+	// Operator Buttons:
+	buttonAdd = new wxButton(this, BUTTON_ADD, _("+"), wxDefaultPosition, buttonSize, 0);
+	buttonSubtract = new wxButton(this, BUTTON_SUBTRACT, _("-"), wxDefaultPosition, buttonSize, 0);
+	buttonMultiply = new wxButton(this, BUTTON_MULTIPLY, _("*"), wxDefaultPosition, buttonSize, 0);
+	buttonDivide = new wxButton(this, BUTTON_DIVIDE, _("/"), wxDefaultPosition, buttonSize, 0);
+	buttonModulo = new wxButton(this, BUTTON_MODULO, _("%"), wxDefaultPosition, buttonSize, 0);
+	buttonClear = new wxButton(this, BUTTON_CLEAR, _("Clear"), wxDefaultPosition, buttonSize, 0);
+	buttonDecimal = new wxButton(this, BUTTON_DECIMAL, _("."), wxDefaultPosition, buttonSize, 0);
+	buttonBackspace = new wxButton(this, BUTTON_BACKSPACE, _("<-"), wxDefaultPosition, buttonSize, 0);
+	buttonPlusMinus = new wxButton(this, BUTTON_PLUS_MINUS, _("+/-"), wxDefaultPosition, buttonSize, 0);
+	buttonLeftParen = new wxButton(this, BUTTON_LEFT_PAREN, _("("), wxDefaultPosition, buttonSize, 0);
+	buttonRightParen = new wxButton(this, BUTTON_RIGHT_PAREN, _(")"), wxDefaultPosition, buttonSize, 0);
+	buttonSin = new wxButton(this, BUTTON_SIN, _("Sin"), wxDefaultPosition, buttonSize, 0);
+	buttonCos = new wxButton(this, BUTTON_COS, _("Cos"), wxDefaultPosition, buttonSize, 0);
+	buttonTan = new wxButton(this, BUTTON_TAN, _("Tan"), wxDefaultPosition, buttonSize, 0);
+	buttonEquals = new wxButton(this, BUTTON_EQUALS, _("="), wxDefaultPosition, buttonSize, 0);
 
-	buttonCos = new wxButton(this, wxID_ANY, _("Cos"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonCos, 0, wxALL, 5);
+	// Number Buttons:
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_0, "0", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_1, "1", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_2, "2", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_3, "3", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_4, "4", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_5, "5", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_6, "6", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_7, "7", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_8, "8", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_9, "9", wxDefaultPosition, buttonSize)));
 
-	buttonTan = new wxButton(this, wxID_ANY, _("Tan"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonTan, 0, wxALL, 5);
+	GridButtonSizer->Add(numberButtons[7].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[8].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[9].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(buttonDivide, 0, wxEXPAND);
 
-	buttonClear = new wxButton(this, wxID_ANY, _("Clear"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonClear, 0, wxALL, 5);
+	GridButtonSizer->Add(numberButtons[4].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[5].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[6].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(buttonMultiply, 0, wxEXPAND);
 
-	button7 = new wxButton(this, wxID_ANY, _("7"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button7, 0, wxALL, 5);
+	GridButtonSizer->Add(numberButtons[1].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[2].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(numberButtons[3].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(buttonSubtract, 0, wxEXPAND);
 
-	button8 = new wxButton(this, wxID_ANY, _("8"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button8, 0, wxALL, 5);
+	GridButtonSizer->Add(numberButtons[0].get(), 0, wxEXPAND);
+	GridButtonSizer->Add(buttonDecimal, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonEquals, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonAdd, 0, wxEXPAND);
 
-	button9 = new wxButton(this, wxID_ANY, _("9"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button9, 0, wxALL, 5);
+	GridButtonSizer->Add(buttonLeftParen, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonRightParen, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonBackspace, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonClear, 0, wxEXPAND);
 
-	buttonMultiply = new wxButton(this, wxID_ANY, _("*"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonMultiply, 0, wxALL, 5);
+	GridButtonSizer->Add(buttonSin, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonCos, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonTan, 0, wxEXPAND);
+	GridButtonSizer->Add(buttonModulo, 0, wxEXPAND);
 
-	button4 = new wxButton(this, wxID_ANY, _("4"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button4, 0, wxALL, 5);
+	// Used Bind instead of an Event Table due to DLL Errors?
+	Bind(wxEVT_BUTTON, &Window::OnButton0, this, BUTTON_0);
+	Bind(wxEVT_BUTTON, &Window::OnButton1, this, BUTTON_1);
+	Bind(wxEVT_BUTTON, &Window::OnButton2, this, BUTTON_2);
+	Bind(wxEVT_BUTTON, &Window::OnButton3, this, BUTTON_3);
+	Bind(wxEVT_BUTTON, &Window::OnButton4, this, BUTTON_4);
+	Bind(wxEVT_BUTTON, &Window::OnButton5, this, BUTTON_5);
+	Bind(wxEVT_BUTTON, &Window::OnButton6, this, BUTTON_6);
+	Bind(wxEVT_BUTTON, &Window::OnButton7, this, BUTTON_7);
+	Bind(wxEVT_BUTTON, &Window::OnButton8, this, BUTTON_8);
+	Bind(wxEVT_BUTTON, &Window::OnButton9, this, BUTTON_9);
 
-	button5 = new wxButton(this, wxID_ANY, _("5"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button5, 0, wxALL, 5);
+	Bind(wxEVT_BUTTON, &Window::OnAdd, this, BUTTON_ADD);
+	Bind(wxEVT_BUTTON, &Window::OnSubtract, this, BUTTON_SUBTRACT);
+	Bind(wxEVT_BUTTON, &Window::OnMultiply, this, BUTTON_MULTIPLY);
+	Bind(wxEVT_BUTTON, &Window::OnDivide, this, BUTTON_DIVIDE);
+	Bind(wxEVT_BUTTON, &Window::OnButtonModulo, this, BUTTON_MODULO);
 
-	button6 = new wxButton(this, wxID_ANY, _("6"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button6, 0, wxALL, 5);
-
-	buttonDivide = new wxButton(this, wxID_ANY, _("/"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonDivide, 0, wxALL, 5);
-
-	button1 = new wxButton(this, wxID_ANY, _("1"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button1, 0, wxALL, 5);
-
-	button2 = new wxButton(this, wxID_ANY, _("2"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button2, 0, wxALL, 5);
-
-	button3 = new wxButton(this, wxID_ANY, _("3"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button3, 0, wxALL, 5);
-
-	buttonAdd = new wxButton(this, wxID_ANY, _("+"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonAdd, 0, wxALL, 5);
-
-	buttonDecimal = new wxButton(this, wxID_ANY, _("."), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonDecimal, 0, wxALL, 5);
-
-	button0 = new wxButton(this, wxID_ANY, _("0"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(button0, 0, wxALL, 5);
-
-	buttonEquals = new wxButton(this, wxID_ANY, _("="), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonEquals, 0, wxALL, 5);
-
-	buttonLeftParen = new wxButton(this, wxID_ANY, _("("), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonLeftParen, 0, wxALL, 5);
-
-	buttonBackspace = new wxButton(this, wxID_ANY, _("<-"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonBackspace, 0, wxALL, 5);
-
-	buttonPlusMinus = new wxButton(this, wxID_ANY, _("+/-"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonPlusMinus, 0, wxALL, 5);
-
-	buttonModulo = new wxButton(this, wxID_ANY, _("%"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonModulo, 0, wxALL, 5);
-
-	buttonRightParen = new wxButton(this, wxID_ANY, _(")"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonRightParen, 0, wxALL, 5);
+	Bind(wxEVT_BUTTON, &Window::OnClear, this, BUTTON_CLEAR);
+	Bind(wxEVT_BUTTON, &Window::OnDecimal, this, BUTTON_DECIMAL);
+	Bind(wxEVT_BUTTON, &Window::OnButtonBackspace, this, BUTTON_BACKSPACE);
+	Bind(wxEVT_BUTTON, &Window::OnButtonPlusMinus, this, BUTTON_PLUS_MINUS);
+	Bind(wxEVT_BUTTON, &Window::OnButtonLeftParen, this, BUTTON_LEFT_PAREN);
+	Bind(wxEVT_BUTTON, &Window::OnButtonRightParen, this, BUTTON_RIGHT_PAREN);
+	Bind(wxEVT_BUTTON, &Window::OnButtonSin, this, BUTTON_SIN);
+	Bind(wxEVT_BUTTON, &Window::OnButtonCos, this, BUTTON_COS);
+	Bind(wxEVT_BUTTON, &Window::OnButtonTan, this, BUTTON_TAN);
+	Bind(wxEVT_BUTTON, &Window::OnButtonEquals, this, BUTTON_EQUALS);
 
 	topLevelSizer->Add(GridButtonSizer, 1, wxEXPAND, 5);
 
@@ -105,64 +149,290 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	this->Center(wxBOTH);
 
-
-
-
-	// Event Tables:
-	buttonSin->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonCos->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonTan->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonClear->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button7->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button8->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button9->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonMultiply->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button4->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button5->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button6->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonDivide->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button1->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button2->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button3->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonAdd->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonDecimal->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	button0->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonEquals->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonLeftParen->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonBackspace->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonPlusMinus->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonModulo->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-	buttonRightParen->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
-
 }
 
-void Window::OnButtonClicked(wxCommandEvent& event)
-{
-	wxObject* obj = event.GetEventObject();
-	wxButton* button = dynamic_cast<wxButton*>(obj);
-	if (!button || !textBox)
-		return;
 
-	wxString buttonLabel = button->GetLabel();
-	if (buttonLabel == "Clear")
+
+void Window::OnAdd(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Add;
+	textBox->SetFocus();
+}
+
+void Window::OnSubtract(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Subtract;
+	textBox->SetFocus();
+}
+
+void Window::OnDivide(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Divide;
+	textBox->SetFocus();
+}
+
+void Window::OnMultiply(wxCommandEvent& event)
+{
+	activeOperand = Right_Operand;
+	currentOperation = Multiply;
+	textBox->SetFocus();
+}
+
+void Window::OnClear(wxCommandEvent& event)
+{
+	leftOperand.clear();
+	rightOperand.clear();
+	result = 0;
+	textBox->Clear();
+	textBox->SetFocus();
+}
+
+void Window::OnDecimal(wxCommandEvent& event)
+{
+	if(activeOperand == Left_Operand)
+		leftOperand += ".";
+	else
+		rightOperand += ".";
+	UpdateResult();
+}
+
+void Window::OnButton1(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "1";
+	else
+		rightOperand += "1";
+	UpdateResult();
+}
+
+void Window::OnButton2(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "2";
+	else
+		rightOperand += "2";
+	UpdateResult();
+}
+
+void Window::OnButton3(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "3";
+	else
+		rightOperand += "3";
+	UpdateResult();
+}
+
+void Window::OnButton4(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "4";
+	else
+		rightOperand += "4";
+	UpdateResult();
+}
+
+void Window::OnButton5(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "5";
+	else
+		rightOperand += "5";
+	UpdateResult();
+}
+
+void Window::OnButton6(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "6";
+	else
+		rightOperand += "6";
+	UpdateResult();
+}
+
+void Window::OnButton7(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "7";
+	else
+		rightOperand += "7";
+	UpdateResult();
+}
+
+void Window::OnButton8(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "8";
+	else
+		rightOperand += "8";
+	UpdateResult();
+}
+
+void Window::OnButton9(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "9";
+	else
+		rightOperand += "9";
+	UpdateResult();
+}
+
+void Window::OnButton0(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "0";
+	else
+		rightOperand += "0";
+	UpdateResult();
+}
+
+void Window::OnButtonBackspace(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand.pop_back();
+	else
+		rightOperand.pop_back();
+	UpdateResult();
+}
+
+void Window::OnButtonPlusMinus(wxCommandEvent& event)
+{
+}
+
+void Window::OnButtonLeftParen(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += "(";
+	else
+		rightOperand += "(";
+	UpdateResult();
+}
+
+void Window::OnButtonRightParen(wxCommandEvent& event)
+{
+	if (activeOperand == Left_Operand)
+		leftOperand += ")";
+	else
+		rightOperand += ")";
+	UpdateResult();
+}
+
+void Window::OnButtonSin(wxCommandEvent& event)
+{
+	if (activeOperand == Right_Operand) {
+		result = std::sin(std::stod(leftOperand));
 		textBox->Clear();
-	else if (buttonLabel == "<-") {
-		wxString currentText = textBox->GetValue();
-		if (!currentText.IsEmpty()) {
-			currentText.RemoveLast();
-			textBox->SetValue(currentText);
-		}
-		else if (buttonLabel == "=") {
-			wxString currentText = textBox->GetValue();
-			//double result = EvaluateExpression(currentText);
-			//textBox->SetValue(wxString::Format("%f", result));
-		}
-		else {
-			textBox->AppendText(buttonLabel);
-		}
+		textBox->AppendText(wxString::Format("%f", result));
+		activeOperand = Left_Operand;
+		leftOperand = std::to_string(result);
+		rightOperand.clear();
 	}
 }
 
+void Window::OnButtonCos(wxCommandEvent& event)
+{
+	if (activeOperand == Right_Operand) {
+		result = std::cos(std::stod(leftOperand));
+		textBox->Clear();
+		textBox->AppendText(wxString::Format("%f", result));
+		activeOperand = Left_Operand;
+		leftOperand = std::to_string(result);
+		rightOperand.clear();
+	}
+}
 
-	
+void Window::OnButtonTan(wxCommandEvent& event)
+{
+	if (activeOperand == Right_Operand) {
+		result = std::tan(std::stod(leftOperand));
+		textBox->Clear();
+		textBox->AppendText(wxString::Format("%f", result));
+		activeOperand = Left_Operand;
+		leftOperand = std::to_string(result);
+		rightOperand.clear();
+	}
+}
+
+void Window::OnButtonModulo(wxCommandEvent& event)
+{
+	if (activeOperand == Right_Operand) {
+		result = std::fmod(std::stod(leftOperand), std::stod(rightOperand));
+		textBox->Clear();
+		textBox->AppendText(wxString::Format("%f", result));
+		activeOperand = Left_Operand;
+		leftOperand = std::to_string(result);
+		rightOperand.clear();
+	}
+}
+
+void Window::OnButtonEquals(wxCommandEvent& event)
+{
+	if (activeOperand == Right_Operand) {
+		if(currentOperation == Add)
+			result = std::stod(leftOperand) + std::stod(rightOperand);
+		else if (currentOperation == Subtract)
+			result = std::stod(leftOperand) - std::stod(rightOperand);
+		else if (currentOperation == Multiply)
+			result = std::stod(leftOperand) * std::stod(rightOperand);
+		else if (currentOperation == Divide)
+			result = std::stod(leftOperand) / std::stod(rightOperand);
+		else if (currentOperation == Modulo)
+			result = std::fmod(std::stod(leftOperand), std::stod(rightOperand));
+
+		textBox->Clear();
+		textBox->AppendText(wxString::Format("%f", result));
+		activeOperand = Left_Operand;
+		leftOperand = std::to_string(result);
+		rightOperand.clear();
+	}
+	textBox->SetFocus();
+}
+
+void Window::UpdateResult()
+{
+	if (activeOperand == Left_Operand){
+		textBox->Clear();
+		textBox->AppendText(leftOperand);
+	}
+	else {
+		textBox->Clear();
+		textBox->AppendText(rightOperand);
+	}
+}
+
+void Window::OnKeypadInput(wxKeyEvent& event)
+{
+	event.Skip(); // Skip if unable to process event
+
+	if (event.GetKeyCode() == WXK_NUMPAD0) OnButton0(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD1) OnButton1(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD2) OnButton2(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD3) OnButton3(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD4) OnButton4(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD5) OnButton5(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD6) OnButton6(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD7) OnButton7(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD8) OnButton8(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD9) OnButton9(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD_ADD) OnAdd(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD_SUBTRACT) OnSubtract(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD_MULTIPLY) OnMultiply(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD_DIVIDE) OnDivide(e);
+	else if (event.GetKeyCode() == WXK_NUMPAD_DECIMAL) OnDecimal(e);
+	else if (event.GetKeyCode() == WXK_RETURN || event.GetKeyCode() == WXK_NUMPAD_ENTER) OnButtonEquals(e);
+	else if (event.GetKeyCode() == WXK_ESCAPE) OnClear(e);
+	else if (event.GetKeyCode() == WXK_LEFT) OnButtonLeftParen(e);
+	else if (event.GetKeyCode() == WXK_RIGHT) OnButtonRightParen(e);
+	else if (event.GetKeyCode() == WXK_F1) OnButtonSin(e);
+	else if (event.GetKeyCode() == WXK_F2) OnButtonCos(e);
+	else if (event.GetKeyCode() == WXK_F3) OnButtonTan(e);
+	else if (event.GetKeyCode() == WXK_BACK){
+		if(activeOperand == Left_Operand && leftOperand.size()) leftOperand.pop_back();
+		else if(activeOperand == Right_Operand && rightOperand.size()) rightOperand.pop_back();
+		UpdateResult();
+	}
+}
 
