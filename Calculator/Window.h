@@ -2,53 +2,28 @@
 #include "wx/wx.h"
 
 
+
+
 class Window : public wxFrame
 {
 private:
 
 	// Number Buttons:
-	wxButton* button1 = nullptr;
-	wxButton* button2 = nullptr;
-	wxButton* button3 = nullptr;
-	wxButton* button4 = nullptr;
-	wxButton* button5 = nullptr;
-	wxButton* button6 = nullptr;
-	wxButton* button7 = nullptr;
-	wxButton* button8 = nullptr;
-	wxButton* button9 = nullptr;
-	wxButton* button0 = nullptr;
+	std::vector<std::shared_ptr<wxButton>> numberButtons; // Vector to hold number buttons
+	
 
 	// Operator Buttons:
-	wxButton* buttonAdd = nullptr;
-	wxButton* buttonSubtract = nullptr;
-	wxButton* buttonMultiply = nullptr;
-	wxButton* buttonDivide = nullptr;
-	wxButton* buttonModulo = nullptr;
+	wxButton *buttonAdd, *buttonSubtract, *buttonMultiply, *buttonDivide, *buttonModulo;
 
 	// Other Buttons:
-	wxButton* buttonClear = nullptr;
-	wxButton* buttonDecimal = nullptr;
-	wxButton* buttonBackspace = nullptr;
-	wxButton* buttonEquals = nullptr;
-	wxButton* buttonPlusMinus = nullptr;
-	wxButton* buttonLeftParen = nullptr;
-	wxButton* buttonRightParen = nullptr;
-	wxButton* buttonSin = nullptr;
-	wxButton* buttonCos = nullptr;
-	wxButton* buttonTan = nullptr;
+	wxButton *buttonClear, *buttonDecimal, *buttonBackspace, *buttonEquals, *buttonPlusMinus, *buttonLeftParen, *buttonRightParen, *buttonSin, *buttonCos, *buttonTan;
+
 
 	// Output Box:
 	wxTextCtrl* textBox = nullptr;
 
-public:
-
-	// Default constructor:
-	Window();
-
-	void OnButtonClicked(wxCommandEvent& event);
-
 	// Event handler for button clicks:
-	wxCommandEvent event; 
+	wxCommandEvent e; 
 
 	// Result of the calculation:
 	double result = 0;
@@ -80,18 +55,23 @@ public:
 	void OnButton8(wxCommandEvent& event);
 	void OnButton9(wxCommandEvent& event);
 	void OnButton0(wxCommandEvent& event);
-	void onButtonBackspace(wxCommandEvent& event);
-	void onButtonPlusMinus(wxCommandEvent& event);
-	void onButtonLeftParen(wxCommandEvent& event);
-	void onButtonRightParen(wxCommandEvent& event);
-	void onButtonSin(wxCommandEvent& event);
-	void onButtonCos(wxCommandEvent& event);
-	void onButtonTan(wxCommandEvent& event);
-	void onButtonModulo(wxCommandEvent& event);
-	void onButtonEquals(wxCommandEvent& event);
-	void UpdateResultDisplay();
-	void onKeypadInput(wxKeyEvent& event);
-
+	void OnButtonBackspace(wxCommandEvent& event);
+	void OnButtonPlusMinus(wxCommandEvent& event);
+	void OnButtonLeftParen(wxCommandEvent& event);
+	void OnButtonRightParen(wxCommandEvent& event);
+	void OnButtonSin(wxCommandEvent& event);
+	void OnButtonCos(wxCommandEvent& event);
+	void OnButtonTan(wxCommandEvent& event);
+	void OnButtonModulo(wxCommandEvent& event);
+	void OnButtonEquals(wxCommandEvent& event);
 	void UpdateResult();
+	void OnKeypadInput(wxKeyEvent& event);
+
+public:
+
+	// Default constructor:
+	Window();
+
+
 
 };
