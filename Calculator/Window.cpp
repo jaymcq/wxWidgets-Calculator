@@ -1,5 +1,8 @@
 #include "Window.h"
 
+
+
+
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), wxSize(320, 375)) {
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
@@ -101,4 +104,65 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 	this->Layout();
 
 	this->Center(wxBOTH);
+
+
+
+
+	// Event Tables:
+	buttonSin->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonCos->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonTan->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonClear->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button7->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button8->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button9->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonMultiply->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button4->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button5->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button6->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonDivide->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button1->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button2->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button3->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonAdd->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonDecimal->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	button0->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonEquals->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonLeftParen->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonBackspace->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonPlusMinus->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonModulo->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+	buttonRightParen->Bind(wxEVT_BUTTON, &Window::OnButtonClicked, this);
+
 }
+
+void Window::OnButtonClicked(wxCommandEvent& event)
+{
+	wxObject* obj = event.GetEventObject();
+	wxButton* button = dynamic_cast<wxButton*>(obj);
+	if (!button || !textBox)
+		return;
+
+	wxString buttonLabel = button->GetLabel();
+	if (buttonLabel == "Clear")
+		textBox->Clear();
+	else if (buttonLabel == "<-") {
+		wxString currentText = textBox->GetValue();
+		if (!currentText.IsEmpty()) {
+			currentText.RemoveLast();
+			textBox->SetValue(currentText);
+		}
+		else if (buttonLabel == "=") {
+			wxString currentText = textBox->GetValue();
+			//double result = EvaluateExpression(currentText);
+			//textBox->SetValue(wxString::Format("%f", result));
+		}
+		else {
+			textBox->AppendText(buttonLabel);
+		}
+	}
+}
+
+
+	
+
