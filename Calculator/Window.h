@@ -31,7 +31,8 @@ private:
 	wxButton* buttonBackspace = nullptr;
 	wxButton* buttonEquals = nullptr;
 	wxButton* buttonPlusMinus = nullptr;
-	wxButton* buttonSquareRoot = nullptr;
+	wxButton* buttonLeftParen = nullptr;
+	wxButton* buttonRightParen = nullptr;
 	wxButton* buttonSin = nullptr;
 	wxButton* buttonCos = nullptr;
 	wxButton* buttonTan = nullptr;

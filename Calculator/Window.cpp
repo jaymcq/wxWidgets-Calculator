@@ -32,8 +32,8 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 	buttonTan = new wxButton(this, wxID_ANY, _("Tan"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(buttonTan, 0, wxALL, 5);
 
-	buttonSquareRoot = new wxButton(this, wxID_ANY, _("SQRT"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonSquareRoot, 0, wxALL, 5);
+	buttonClear = new wxButton(this, wxID_ANY, _("Clear"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonClear, 0, wxALL, 5);
 
 	button7 = new wxButton(this, wxID_ANY, _("7"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(button7, 0, wxALL, 5);
@@ -80,8 +80,8 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 	buttonEquals = new wxButton(this, wxID_ANY, _("="), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(buttonEquals, 0, wxALL, 5);
 
-	buttonClear = new wxButton(this, wxID_ANY, _("Clear"), wxDefaultPosition, wxSize(65, 35), 0);
-	GridButtonSizer->Add(buttonClear, 0, wxALL, 5);
+	buttonLeftParen = new wxButton(this, wxID_ANY, _("("), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonLeftParen, 0, wxALL, 5);
 
 	buttonBackspace = new wxButton(this, wxID_ANY, _("<-"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(buttonBackspace, 0, wxALL, 5);
@@ -91,6 +91,9 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	buttonModulo = new wxButton(this, wxID_ANY, _("%"), wxDefaultPosition, wxSize(65, 35), 0);
 	GridButtonSizer->Add(buttonModulo, 0, wxALL, 5);
+
+	buttonRightParen = new wxButton(this, wxID_ANY, _(")"), wxDefaultPosition, wxSize(65, 35), 0);
+	GridButtonSizer->Add(buttonRightParen, 0, wxALL, 5);
 
 	topLevelSizer->Add(GridButtonSizer, 1, wxEXPAND, 5);
 
