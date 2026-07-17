@@ -67,7 +67,6 @@ private:
 	void UpdateResult();
 	void OnKeypadInput(wxKeyEvent& event);
 
-	wxDECLARE_EVENT_TABLE();
 
 public:
 
