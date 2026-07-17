@@ -7,5 +7,5 @@
     <File Path=".gitignore" />
     <File Path="readme.md" />
   </Folder>
-  <Project Path="Calculator/Calculator.vcxproj" />
+  <Project Path="Calculator/Calculator.vcxproj" Id="e94f9152-5369-4659-9c16-d9e467a6cade" />
 </Solution>
