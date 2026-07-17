@@ -1,4 +1,5 @@
 #include "ButtonFactory.h"
+#include "wx/wx.h"
 
 enum {
     BUTTON_0 = 1000,
@@ -116,7 +117,7 @@ wxButton* ButtonFactory::CreateDecimalButton(wxWindow* parent)
     return CreateButton(parent, BUTTON_DECIMAL, ".", wxDefaultPosition, buttonSize);
 }
 
-wxButton* ButtonFactory::CreatePosNegButton(wxWindow* parent)
+wxButton* ButtonFactory::CreatePlusMinusButton(wxWindow* parent)
 {
     return CreateButton(parent, BUTTON_PLUS_MINUS, "+/-", wxDefaultPosition, buttonSize);
 }

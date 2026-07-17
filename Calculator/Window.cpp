@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "ButtonFactory.h"
 
 enum {
 	BUTTON_0 = 1000,
@@ -51,37 +52,39 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	wxGridSizer* GridButtonSizer = new wxGridSizer(6, 4, 6, 6);
 
-	// Button Size:
-	wxSize buttonSize(65, 35);
+
 
 	// Operator Buttons:
-	buttonAdd = new wxButton(this, BUTTON_ADD, _("+"), wxDefaultPosition, buttonSize, 0);
-	buttonSubtract = new wxButton(this, BUTTON_SUBTRACT, _("-"), wxDefaultPosition, buttonSize, 0);
-	buttonMultiply = new wxButton(this, BUTTON_MULTIPLY, _("*"), wxDefaultPosition, buttonSize, 0);
-	buttonDivide = new wxButton(this, BUTTON_DIVIDE, _("/"), wxDefaultPosition, buttonSize, 0);
-	buttonModulo = new wxButton(this, BUTTON_MODULO, _("%"), wxDefaultPosition, buttonSize, 0);
-	buttonClear = new wxButton(this, BUTTON_CLEAR, _("Clear"), wxDefaultPosition, buttonSize, 0);
-	buttonDecimal = new wxButton(this, BUTTON_DECIMAL, _("."), wxDefaultPosition, buttonSize, 0);
-	buttonBackspace = new wxButton(this, BUTTON_BACKSPACE, _("<-"), wxDefaultPosition, buttonSize, 0);
-	buttonPlusMinus = new wxButton(this, BUTTON_PLUS_MINUS, _("+/-"), wxDefaultPosition, buttonSize, 0);
-	buttonLeftParen = new wxButton(this, BUTTON_LEFT_PAREN, _("("), wxDefaultPosition, buttonSize, 0);
-	buttonRightParen = new wxButton(this, BUTTON_RIGHT_PAREN, _(")"), wxDefaultPosition, buttonSize, 0);
-	buttonSin = new wxButton(this, BUTTON_SIN, _("Sin"), wxDefaultPosition, buttonSize, 0);
-	buttonCos = new wxButton(this, BUTTON_COS, _("Cos"), wxDefaultPosition, buttonSize, 0);
-	buttonTan = new wxButton(this, BUTTON_TAN, _("Tan"), wxDefaultPosition, buttonSize, 0);
-	buttonEquals = new wxButton(this, BUTTON_EQUALS, _("="), wxDefaultPosition, buttonSize, 0);
+	wxButton* addButton = ButtonFactory::CreateAddButton(this);
+	wxButton* subtractButton = ButtonFactory::CreateSubtractButton(this);
+	wxButton* multiplyButton = ButtonFactory::CreateMultiplyButton(this);
+	wxButton* modButton = ButtonFactory::CreateModuloButton(this);
+	wxButton* divideButton = ButtonFactory::CreateDivideButton(this);
+	wxButton* clearButton = ButtonFactory::CreateClearButton(this);
+	wxButton* decimalButton = ButtonFactory::CreateDecimalButton(this);
+	wxButton* backspaceButton = ButtonFactory::CreateBackspaceButton(this);
+	wxButton* subButton = ButtonFactory::CreatePlusMinusButton(this);
+	wxButton* leftParenButton = ButtonFactory::CreateLeftParenButton(this);
+	wxButton* rightParenButton = ButtonFactory::CreateRightParenButton(this);
+	wxButton* sinButton = ButtonFactory::CreateSinButton(this);
+	wxButton* cosButton = ButtonFactory::CreateCosButton(this);
+	wxButton* tanButton = ButtonFactory::CreateTanButton(this);
+	wxButton* equalsButton = ButtonFactory::CreateEqualsButton(this);
+	
 
 	// Number Buttons:
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_0, "0", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_1, "1", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_2, "2", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_3, "3", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_4, "4", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_5, "5", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_6, "6", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_7, "7", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_8, "8", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_9, "9", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateZeroButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateOneButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateTwoButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateThreeButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateFourButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateFiveButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateSixButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateSevenButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateEightButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateNineButton(this)));
+
+
 
 	GridButtonSizer->Add(numberButtons[7].get(), 0, wxEXPAND);
 	GridButtonSizer->Add(numberButtons[8].get(), 0, wxEXPAND);
