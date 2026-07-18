@@ -156,7 +156,6 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 }
 
-std::string problem = ->GetValue().ToStdString();
 
 void Window::OnAdd(wxCommandEvent& event)
 {

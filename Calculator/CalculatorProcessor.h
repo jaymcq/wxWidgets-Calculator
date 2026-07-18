@@ -3,12 +3,5 @@
 
 class CalculatorProcessor
 {
-private:
-	CalculatorProcessor();
-	CalculatorProcessor* instance;
-
-public:
-	CalculatorProcessor* GetInstance();
-	double Calculate(std::string& problem);
 };
 
