@@ -1,6 +1,6 @@
 #pragma once
 #include "wx/wx.h"
-
+#include "ButtonFactory.h"
 
 
 
@@ -66,6 +66,7 @@ private:
 	void OnButtonEquals(wxCommandEvent& event);
 	void UpdateResult();
 	void OnKeypadInput(wxKeyEvent& event);
+
 
 public:
 

@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "ButtonFactory.h"
 
 enum {
 	BUTTON_0 = 1000,
@@ -51,37 +52,39 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 	wxGridSizer* GridButtonSizer = new wxGridSizer(6, 4, 6, 6);
 
-	// Button Size:
-	wxSize buttonSize(65, 35);
+
 
 	// Operator Buttons:
-	buttonAdd = new wxButton(this, BUTTON_ADD, _("+"), wxDefaultPosition, buttonSize, 0);
-	buttonSubtract = new wxButton(this, BUTTON_SUBTRACT, _("-"), wxDefaultPosition, buttonSize, 0);
-	buttonMultiply = new wxButton(this, BUTTON_MULTIPLY, _("*"), wxDefaultPosition, buttonSize, 0);
-	buttonDivide = new wxButton(this, BUTTON_DIVIDE, _("/"), wxDefaultPosition, buttonSize, 0);
-	buttonModulo = new wxButton(this, BUTTON_MODULO, _("%"), wxDefaultPosition, buttonSize, 0);
-	buttonClear = new wxButton(this, BUTTON_CLEAR, _("Clear"), wxDefaultPosition, buttonSize, 0);
-	buttonDecimal = new wxButton(this, BUTTON_DECIMAL, _("."), wxDefaultPosition, buttonSize, 0);
-	buttonBackspace = new wxButton(this, BUTTON_BACKSPACE, _("<-"), wxDefaultPosition, buttonSize, 0);
-	buttonPlusMinus = new wxButton(this, BUTTON_PLUS_MINUS, _("+/-"), wxDefaultPosition, buttonSize, 0);
-	buttonLeftParen = new wxButton(this, BUTTON_LEFT_PAREN, _("("), wxDefaultPosition, buttonSize, 0);
-	buttonRightParen = new wxButton(this, BUTTON_RIGHT_PAREN, _(")"), wxDefaultPosition, buttonSize, 0);
-	buttonSin = new wxButton(this, BUTTON_SIN, _("Sin"), wxDefaultPosition, buttonSize, 0);
-	buttonCos = new wxButton(this, BUTTON_COS, _("Cos"), wxDefaultPosition, buttonSize, 0);
-	buttonTan = new wxButton(this, BUTTON_TAN, _("Tan"), wxDefaultPosition, buttonSize, 0);
-	buttonEquals = new wxButton(this, BUTTON_EQUALS, _("="), wxDefaultPosition, buttonSize, 0);
+	wxButton* addButton = ButtonFactory::CreateAddButton(this);
+	wxButton* subtractButton = ButtonFactory::CreateSubtractButton(this);
+	wxButton* multiplyButton = ButtonFactory::CreateMultiplyButton(this);
+	wxButton* moduloButton = ButtonFactory::CreateModuloButton(this);
+	wxButton* divideButton = ButtonFactory::CreateDivideButton(this);
+	wxButton* clearButton = ButtonFactory::CreateClearButton(this);
+	wxButton* decimalButton = ButtonFactory::CreateDecimalButton(this);
+	wxButton* backspaceButton = ButtonFactory::CreateBackspaceButton(this);
+	wxButton* plusMinusButton = ButtonFactory::CreatePlusMinusButton(this);
+	wxButton* leftParenButton = ButtonFactory::CreateLeftParenButton(this);
+	wxButton* rightParenButton = ButtonFactory::CreateRightParenButton(this);
+	wxButton* sinButton = ButtonFactory::CreateSinButton(this);
+	wxButton* cosButton = ButtonFactory::CreateCosButton(this);
+	wxButton* tanButton = ButtonFactory::CreateTanButton(this);
+	wxButton* equalsButton = ButtonFactory::CreateEqualsButton(this);
+	
 
 	// Number Buttons:
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_0, "0", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_1, "1", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_2, "2", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_3, "3", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_4, "4", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_5, "5", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_6, "6", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_7, "7", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_8, "8", wxDefaultPosition, buttonSize)));
-	numberButtons.push_back(std::shared_ptr<wxButton>(new wxButton(this, BUTTON_9, "9", wxDefaultPosition, buttonSize)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateZeroButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateOneButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateTwoButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateThreeButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateFourButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateFiveButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateSixButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateSevenButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateEightButton(this)));
+	numberButtons.push_back(std::shared_ptr<wxButton>(ButtonFactory::CreateNineButton(this)));
+
+
 
 	GridButtonSizer->Add(numberButtons[7].get(), 0, wxEXPAND);
 	GridButtonSizer->Add(numberButtons[8].get(), 0, wxEXPAND);
@@ -113,34 +116,36 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 	GridButtonSizer->Add(buttonTan, 0, wxEXPAND);
 	GridButtonSizer->Add(buttonModulo, 0, wxEXPAND);
 
-	// Used Bind instead of an Event Table due to DLL Errors?
-	Bind(wxEVT_BUTTON, &Window::OnButton0, this, BUTTON_0);
-	Bind(wxEVT_BUTTON, &Window::OnButton1, this, BUTTON_1);
-	Bind(wxEVT_BUTTON, &Window::OnButton2, this, BUTTON_2);
-	Bind(wxEVT_BUTTON, &Window::OnButton3, this, BUTTON_3);
-	Bind(wxEVT_BUTTON, &Window::OnButton4, this, BUTTON_4);
-	Bind(wxEVT_BUTTON, &Window::OnButton5, this, BUTTON_5);
-	Bind(wxEVT_BUTTON, &Window::OnButton6, this, BUTTON_6);
-	Bind(wxEVT_BUTTON, &Window::OnButton7, this, BUTTON_7);
-	Bind(wxEVT_BUTTON, &Window::OnButton8, this, BUTTON_8);
-	Bind(wxEVT_BUTTON, &Window::OnButton9, this, BUTTON_9);
+	// Bind number buttons:
+	numberButtons[0]->Bind(wxEVT_BUTTON, &Window::OnButton0, this);
+	numberButtons[1]->Bind(wxEVT_BUTTON, &Window::OnButton1, this);
+	numberButtons[2]->Bind(wxEVT_BUTTON, &Window::OnButton2, this);
+	numberButtons[3]->Bind(wxEVT_BUTTON, &Window::OnButton3, this);
+	numberButtons[4]->Bind(wxEVT_BUTTON, &Window::OnButton4, this);
+	numberButtons[5]->Bind(wxEVT_BUTTON, &Window::OnButton5, this);
+	numberButtons[6]->Bind(wxEVT_BUTTON, &Window::OnButton6, this);
+	numberButtons[7]->Bind(wxEVT_BUTTON, &Window::OnButton7, this);
+	numberButtons[8]->Bind(wxEVT_BUTTON, &Window::OnButton8, this);
+	numberButtons[9]->Bind(wxEVT_BUTTON, &Window::OnButton9, this);
 
-	Bind(wxEVT_BUTTON, &Window::OnAdd, this, BUTTON_ADD);
-	Bind(wxEVT_BUTTON, &Window::OnSubtract, this, BUTTON_SUBTRACT);
-	Bind(wxEVT_BUTTON, &Window::OnMultiply, this, BUTTON_MULTIPLY);
-	Bind(wxEVT_BUTTON, &Window::OnDivide, this, BUTTON_DIVIDE);
-	Bind(wxEVT_BUTTON, &Window::OnButtonModulo, this, BUTTON_MODULO);
-
-	Bind(wxEVT_BUTTON, &Window::OnClear, this, BUTTON_CLEAR);
-	Bind(wxEVT_BUTTON, &Window::OnDecimal, this, BUTTON_DECIMAL);
-	Bind(wxEVT_BUTTON, &Window::OnButtonBackspace, this, BUTTON_BACKSPACE);
-	Bind(wxEVT_BUTTON, &Window::OnButtonPlusMinus, this, BUTTON_PLUS_MINUS);
-	Bind(wxEVT_BUTTON, &Window::OnButtonLeftParen, this, BUTTON_LEFT_PAREN);
-	Bind(wxEVT_BUTTON, &Window::OnButtonRightParen, this, BUTTON_RIGHT_PAREN);
-	Bind(wxEVT_BUTTON, &Window::OnButtonSin, this, BUTTON_SIN);
-	Bind(wxEVT_BUTTON, &Window::OnButtonCos, this, BUTTON_COS);
-	Bind(wxEVT_BUTTON, &Window::OnButtonTan, this, BUTTON_TAN);
-	Bind(wxEVT_BUTTON, &Window::OnButtonEquals, this, BUTTON_EQUALS);
+	// Bind functions:
+	addButton->Bind(wxEVT_BUTTON, &Window::OnAdd, this);
+	subtractButton->Bind(wxEVT_BUTTON, &Window::OnSubtract, this);
+	multiplyButton->Bind(wxEVT_BUTTON, &Window::OnMultiply, this);
+	divideButton->Bind(wxEVT_BUTTON, &Window::OnDivide, this);
+	moduloButton->Bind(wxEVT_BUTTON, &Window::OnButtonModulo, this);
+	sinButton->Bind(wxEVT_BUTTON, &Window::OnButtonSin, this);
+	cosButton->Bind(wxEVT_BUTTON, &Window::OnButtonCos, this);
+	tanButton->Bind(wxEVT_BUTTON, &Window::OnButtonTan, this);
+	equalsButton->Bind(wxEVT_BUTTON, &Window::OnButtonEquals, this);
+	
+	// Bind extras:
+	clearButton->Bind(wxEVT_BUTTON, &Window::OnClear, this);
+	decimalButton->Bind(wxEVT_BUTTON, &Window::OnDecimal, this);
+	backspaceButton->Bind(wxEVT_BUTTON, &Window::OnButtonBackspace, this);
+	plusMinusButton->Bind(wxEVT_BUTTON, &Window::OnButtonPlusMinus, this);
+	leftParenButton->Bind(wxEVT_BUTTON, &Window::OnButtonLeftParen, this);
+	rightParenButton->Bind(wxEVT_BUTTON, &Window::OnButtonRightParen, this);
 
 	topLevelSizer->Add(GridButtonSizer, 1, wxEXPAND, 5);
 
