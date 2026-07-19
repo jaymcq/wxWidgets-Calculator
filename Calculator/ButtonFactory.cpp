@@ -13,75 +13,75 @@ wxButton* ButtonFactory::CreateNumberButton(wxWindow* parent, wxWindowID id, con
 
 wxButton* ButtonFactory::CreateAddButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Add, "+");
+    return CreateButton(parent, BUTTON_ADD, "+");
 }
 
 wxButton* ButtonFactory::CreateSubtractButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Subtract, "-");
+    return CreateButton(parent, BUTTON_SUBTRACT, "-");
 }
 
 wxButton* ButtonFactory::CreateMultiplyButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Multiply, "*");
+    return CreateButton(parent, BUTTON_MULTIPLY, "*");
 }
 
 wxButton* ButtonFactory::CreateDivideButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Divide, "/");
+    return CreateButton(parent, BUTTON_DIVIDE, "/");
 }
 
 wxButton* ButtonFactory::CreateModuloButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Modulo, "%");
+    return CreateButton(parent, BUTTON_MODULO, "%");
 }
 
 wxButton* ButtonFactory::CreateDecimalButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Decimal, ".");
+    return CreateButton(parent, BUTTON_DECIMAL, ".");
 }
 
 wxButton* ButtonFactory::CreatePlusMinusButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::PlusMinus, "+/-");
+    return CreateButton(parent, BUTTON_PLUSMINUS, "+/-");
 }
 
 wxButton* ButtonFactory::CreateCosButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Cos, "COS");
+    return CreateButton(parent, BUTTON_COS, "COS");
 }
 
 wxButton* ButtonFactory::CreateSinButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Sin, "SIN");
+    return CreateButton(parent, BUTTON_SIN, "SIN");
 }
 
 wxButton* ButtonFactory::CreateTanButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Tan, "TAN");
+    return CreateButton(parent, BUTTON_TAN, "TAN");
 }
 
 wxButton* ButtonFactory::CreateBackspaceButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Backspace, "<-");
+    return CreateButton(parent, BUTTON_BACKSPACE, "<-");
 }
 
 wxButton* ButtonFactory::CreateEqualsButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Equals, "=");
+    return CreateButton(parent, BUTTON_EQUALS, "=");
 }
 
 wxButton* ButtonFactory::CreateLeftParenButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::LeftParenthesis, "(");
+    return CreateButton(parent, BUTTON_LEFTPAREN, "(");
 }
 
 wxButton* ButtonFactory::CreateRightParenButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::RightParenthesis, ")");
+    return CreateButton(parent, BUTTON_RIGHTPAREN, ")");
 }
 
 wxButton* ButtonFactory::CreateClearButton(wxWindow* parent)
 {
-    return CreateButton(parent, ButtonId::Clear, "Clear");
+    return CreateButton(parent, BUTTON_CLEAR, "Clear");
 }

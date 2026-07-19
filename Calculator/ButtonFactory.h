@@ -1,34 +1,33 @@
 #pragma once
 #include "wx/wx.h"
 
-namespace ButtonId
-{
-	constexpr wxWindowID Zero = 1000;
-	constexpr wxWindowID One = 1001;
-	constexpr wxWindowID Two = 1002;
-	constexpr wxWindowID Three = 1003;
-	constexpr wxWindowID Four = 1004;
-	constexpr wxWindowID Five = 1005;
-	constexpr wxWindowID Six = 1006;
-	constexpr wxWindowID Seven = 1007;
-	constexpr wxWindowID Eight = 1008;
-	constexpr wxWindowID Nine = 1009;
-	constexpr wxWindowID Add = 1010;
-	constexpr wxWindowID Subtract = 1011;
-	constexpr wxWindowID Multiply = 1012;
-	constexpr wxWindowID Divide = 1013;
-	constexpr wxWindowID Modulo = 1014;
-	constexpr wxWindowID Clear = 1015;
-	constexpr wxWindowID Decimal = 1016;
-	constexpr wxWindowID Backspace = 1017;
-	constexpr wxWindowID PlusMinus = 1018;
-	constexpr wxWindowID LeftParenthesis = 1019;
-	constexpr wxWindowID RightParenthesis = 1020;
-	constexpr wxWindowID Sin = 1021;
-	constexpr wxWindowID Cos = 1022;
-	constexpr wxWindowID Tan = 1023;
-	constexpr wxWindowID Equals = 1024;
-}
+enum {
+	BUTTON_0 = 1000,
+	BUTTON_1 = 1001,
+	BUTTON_2 = 1002,
+	BUTTON_3 = 1003,
+	BUTTON_4 = 1004,
+	BUTTON_5 = 1005,
+	BUTTON_6 = 1006,
+	BUTTON_7 = 1007,
+	BUTTON_8 = 1008,
+	BUTTON_9 = 1009,
+	BUTTON_ADD = 1010,
+	BUTTON_SUBTRACT = 1011,
+	BUTTON_MULTIPLY = 1012,
+	BUTTON_DIVIDE = 1013,
+	BUTTON_MODULO = 1014,
+	BUTTON_CLEAR = 1015,
+	BUTTON_DECIMAL = 1016,
+	BUTTON_EQUALS = 1017,
+	BUTTON_PLUSMINUS = 1018,
+	BUTTON_COS = 1019,
+	BUTTON_SIN = 1020,
+	BUTTON_TAN = 1021,
+	BUTTON_BACKSPACE = 1022,
+	BUTTON_LEFTPAREN = 1023,
+	BUTTON_RIGHTPAREN = 1024,
+};
 
 class ButtonFactory
 {
