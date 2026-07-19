@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "ButtonFactory.h"
+#include "CalculatorProcessor.h"
 
 
 
@@ -7,6 +8,9 @@
 
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), wxSize(320, 375)) {
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
+	this->SetBackgroundColour(wxColour(64, 64, 64)); // Dark-grey border around the controls
+
+	SetBackgroundColour(wxString("DARK GREY"));
 
 	wxBoxSizer* topLevelSizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* textCtrlSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -133,252 +137,147 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(100, 100), w
 
 void Window::OnAdd(wxCommandEvent& event)
 {
-	activeOperand = Right_Operand;
-	currentOperation = Add;
-	textBox->SetFocus();
+	AppendExpression("+");
 }
 
 void Window::OnSubtract(wxCommandEvent& event)
 {
-	activeOperand = Right_Operand;
-	currentOperation = Subtract;
-	textBox->SetFocus();
+	AppendExpression("-");
 }
 
 void Window::OnDivide(wxCommandEvent& event)
 {
-	activeOperand = Right_Operand;
-	currentOperation = Divide;
-	textBox->SetFocus();
+	AppendExpression("/");
 }
 
 void Window::OnMultiply(wxCommandEvent& event)
 {
-	activeOperand = Right_Operand;
-	currentOperation = Multiply;
-	textBox->SetFocus();
+	AppendExpression("*");
 }
 
 void Window::OnClear(wxCommandEvent& event)
 {
-	leftOperand.clear();
-	rightOperand.clear();
-	result = 0;
 	textBox->Clear();
 	textBox->SetFocus();
 }
 
 void Window::OnDecimal(wxCommandEvent& event)
 {
-	if(activeOperand == Left_Operand)
-		leftOperand += ".";
-	else
-		rightOperand += ".";
-	UpdateResult();
+	AppendExpression(".");
 }
 
 void Window::OnButton1(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "1";
-	else
-		rightOperand += "1";
-	UpdateResult();
+	AppendExpression("1");
 }
 
 void Window::OnButton2(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "2";
-	else
-		rightOperand += "2";
-	UpdateResult();
+	AppendExpression("2");
 }
 
 void Window::OnButton3(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "3";
-	else
-		rightOperand += "3";
-	UpdateResult();
+	AppendExpression("3");
 }
 
 void Window::OnButton4(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "4";
-	else
-		rightOperand += "4";
-	UpdateResult();
+	AppendExpression("4");
 }
 
 void Window::OnButton5(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "5";
-	else
-		rightOperand += "5";
-	UpdateResult();
+	AppendExpression("5");
 }
 
 void Window::OnButton6(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "6";
-	else
-		rightOperand += "6";
-	UpdateResult();
+	AppendExpression("6");
 }
 
 void Window::OnButton7(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "7";
-	else
-		rightOperand += "7";
-	UpdateResult();
+	AppendExpression("7");
 }
 
 void Window::OnButton8(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "8";
-	else
-		rightOperand += "8";
-	UpdateResult();
+	AppendExpression("8");
 }
 
 void Window::OnButton9(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "9";
-	else
-		rightOperand += "9";
-	UpdateResult();
+	AppendExpression("9");
 }
 
 void Window::OnButton0(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "0";
-	else
-		rightOperand += "0";
-	UpdateResult();
+	AppendExpression("0");
 }
 
 void Window::OnButtonBackspace(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand.pop_back();
-	else
-		rightOperand.pop_back();
-	UpdateResult();
+	const long position = textBox->GetInsertionPoint();
+	if (position > 0) {
+		textBox->Remove(position - 1, position);
+		textBox->SetInsertionPoint(position - 1);
+	}
 }
 
 void Window::OnButtonPlusMinus(wxCommandEvent& event)
 {
+	AppendExpression("-");
 }
 
 void Window::OnButtonLeftParen(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += "(";
-	else
-		rightOperand += "(";
-	UpdateResult();
+	AppendExpression("(");
 }
 
 void Window::OnButtonRightParen(wxCommandEvent& event)
 {
-	if (activeOperand == Left_Operand)
-		leftOperand += ")";
-	else
-		rightOperand += ")";
-	UpdateResult();
+	AppendExpression(")");
 }
 
 void Window::OnButtonSin(wxCommandEvent& event)
 {
-	if (activeOperand == Right_Operand) {
-		result = std::sin(std::stod(leftOperand));
-		textBox->Clear();
-		textBox->AppendText(wxString::Format("%f", result));
-		activeOperand = Left_Operand;
-		leftOperand = std::to_string(result);
-		rightOperand.clear();
-	}
+	AppendExpression("Sin");
 }
 
 void Window::OnButtonCos(wxCommandEvent& event)
 {
-	if (activeOperand == Right_Operand) {
-		result = std::cos(std::stod(leftOperand));
-		textBox->Clear();
-		textBox->AppendText(wxString::Format("%f", result));
-		activeOperand = Left_Operand;
-		leftOperand = std::to_string(result);
-		rightOperand.clear();
-	}
+	AppendExpression("Cos");
 }
 
 void Window::OnButtonTan(wxCommandEvent& event)
 {
-	if (activeOperand == Right_Operand) {
-		result = std::tan(std::stod(leftOperand));
-		textBox->Clear();
-		textBox->AppendText(wxString::Format("%f", result));
-		activeOperand = Left_Operand;
-		leftOperand = std::to_string(result);
-		rightOperand.clear();
-	}
+	AppendExpression("Tan");
 }
 
 void Window::OnButtonModulo(wxCommandEvent& event)
 {
-	if (activeOperand == Right_Operand) {
-		result = std::fmod(std::stod(leftOperand), std::stod(rightOperand));
-		textBox->Clear();
-		textBox->AppendText(wxString::Format("%f", result));
-		activeOperand = Left_Operand;
-		leftOperand = std::to_string(result);
-		rightOperand.clear();
-	}
+	AppendExpression("%");
 }
 
 void Window::OnButtonEquals(wxCommandEvent& event)
 {
-	if (activeOperand == Right_Operand) {
-		if(currentOperation == Add)
-			result = std::stod(leftOperand) + std::stod(rightOperand);
-		else if (currentOperation == Subtract)
-			result = std::stod(leftOperand) - std::stod(rightOperand);
-		else if (currentOperation == Multiply)
-			result = std::stod(leftOperand) * std::stod(rightOperand);
-		else if (currentOperation == Divide)
-			result = std::stod(leftOperand) / std::stod(rightOperand);
-		else if (currentOperation == Modulo)
-			result = std::fmod(std::stod(leftOperand), std::stod(rightOperand));
-
-		textBox->Clear();
-		textBox->AppendText(wxString::Format("%f", result));
-		activeOperand = Left_Operand;
-		leftOperand = std::to_string(result);
-		rightOperand.clear();
+	try {
+		const std::string expression = textBox->GetValue().ToStdString();
+		const double result = CalculatorProcessor::GetInstance()->Calculate(expression);
+		textBox->SetValue(wxString::Format("%.12g", result));
+	}
+	catch (const std::exception& error) {
+		textBox->SetValue("Error: " + wxString::FromUTF8(error.what()));
 	}
 	textBox->SetFocus();
 }
 
-void Window::UpdateResult()
+void Window::AppendExpression(const wxString& value)
 {
-	if (activeOperand == Left_Operand){
-		textBox->Clear();
-		textBox->AppendText(leftOperand);
-	}
-	else {
-		textBox->Clear();
-		textBox->AppendText(rightOperand);
-	}
+	if (textBox->GetValue().StartsWith("Error:")) textBox->Clear();
+	textBox->WriteText(value);
+	textBox->SetFocus();
 }
 
 void Window::OnKeypadInput(wxKeyEvent& event)
@@ -408,9 +307,6 @@ void Window::OnKeypadInput(wxKeyEvent& event)
 	else if (event.GetKeyCode() == WXK_F2) OnButtonCos(e);
 	else if (event.GetKeyCode() == WXK_F3) OnButtonTan(e);
 	else if (event.GetKeyCode() == WXK_BACK){
-		if(activeOperand == Left_Operand && leftOperand.size()) leftOperand.pop_back();
-		else if(activeOperand == Right_Operand && rightOperand.size()) rightOperand.pop_back();
-		UpdateResult();
+		OnButtonBackspace(e);
 	}
 }
-

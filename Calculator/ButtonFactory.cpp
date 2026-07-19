@@ -3,7 +3,10 @@
 
 wxButton* ButtonFactory::CreateButton(wxWindow* parent, wxWindowID id, const wxString& name, const wxPoint& point, const wxSize& size)
 {
-    return new wxButton(parent, id, name, point, size);
+    wxButton* button = new wxButton(parent, id, name, point, size);
+    button->SetBackgroundColour(wxColour(211, 211, 211)); // Light grey
+    button->SetForegroundColour(*wxBLACK);
+    return button;
 }
 
 wxButton* ButtonFactory::CreateNumberButton(wxWindow* parent, wxWindowID id, const wxString& number)
