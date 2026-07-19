@@ -4,11 +4,11 @@
 
 ```
 
-Current version v1.0.0
+Current version v1.1.0
 
-Basic UI elements, basic grey color way, and string output.
+A basic wxWidgets calculator witten in C++. 
+Has basic math and trigonometry functions.
 
-- Future wants for this project:
-	If I can find the time, I need to implement PEMDAS, I would like to make it more visually appealing. Maybe change the fonts. 
+More changes to come...
 
-This is a work in progress. I am by no means a professional.
+```
